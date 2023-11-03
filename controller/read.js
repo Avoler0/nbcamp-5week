@@ -21,8 +21,6 @@ export const readByIdProduct= async (req,res) => {
   try{
     const result = await products.find({productId})
 
-    console.log(result)
-
     res.status(200).json(result);
   }catch(err){
     console.log(err)

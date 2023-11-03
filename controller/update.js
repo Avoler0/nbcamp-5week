@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import products from "../schemas/products.schema.js";
 
 export const updateProduct = async (req,res) => {
