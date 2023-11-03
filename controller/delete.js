@@ -16,7 +16,6 @@ export const deleteProduct = async (req,res) => {
 
     res.status(200).send({message:"상품을 삭제하였습니다."})
   }catch(err){
-    console.log('삭제 에러',err)
     return res.status(400).send({ message:'데이터 형식이 올바르지 않습니다.' ,err})
   }
 }
