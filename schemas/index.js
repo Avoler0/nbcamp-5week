@@ -3,9 +3,6 @@ import { config } from 'dotenv';
 
 config();
 
-const id = process.env.MONGO_DB_ID;
-const pw = process.env.MONGO_DB_PW;
-
 export const connect = () => {
   mongoose
   .connect(`mongodb+srv://${id}:${pw}@cluster0.dkjqggf.mongodb.net/`,{

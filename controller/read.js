@@ -4,12 +4,8 @@ export const readAllProduct = async (req,res) => {
   try{
     const result = await products.find({})
 
-    console.log(result)
-
     res.status(200).json(result);
   }catch(err){
-    console.log(err)
-
     res.status(400).send('failed read')
   }
 
