@@ -15,7 +15,6 @@ const swaggerOptions = {
       version: '1.0.0',
       description: 'express'
     },
-    host: 'localhost:3000',
     basePath: '/'
   },
   apis:['./swagger/*.js','./routes/products.router.js']
