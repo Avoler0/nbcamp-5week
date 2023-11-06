@@ -19,9 +19,6 @@ export const updateProduct = async (req,res) => {
 
     res.status(200).send({ message:'상품 정보를 수정하였습니다.' })
   }catch(err){
-
-    if(err.name === "CastError") return res.status(400).send({ message:'데이터 형식이 올바르지 않습니다.' })
-
-    res.status(404).send(err)
+    res.status(400).send({ message:'데이터 형식이 올바르지 않습니다.' })
   }
 }

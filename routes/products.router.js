@@ -7,16 +7,16 @@ import { updateProduct } from "../controller/update.js";
 const router = express.Router();
 
 // Create
-router.post('/products',createProduct)
+router.post('/product',createProduct)
 
 // Read
 router.get('/products',readAllProduct)
-router.get('/products/:productId', readByIdProduct)
+router.get('/product/:productId', readByIdProduct)
 
 // Update
-router.patch('/products/:productId',updateProduct)
+router.patch('/product/:productId',updateProduct)
 
 // Delete
-router.delete('/products/:productId',deleteProduct)
+router.delete('/product/:productId',deleteProduct)
 
 export default router;

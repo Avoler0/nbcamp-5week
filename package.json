@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,10 @@
     "express": "^4.18.2",
     "mongoose": "^8.0.0"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui": "^5.9.1",
+    "swagger-ui-express": "^5.0.0"
+  }
 }
