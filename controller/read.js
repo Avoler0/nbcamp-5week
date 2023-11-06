@@ -7,9 +7,9 @@ export const readAllProduct = async (req,res) => {
   try{
     const result = await products.find({}).sort(createSort)
 
-    res.status(200).json({data:result});
+    res.status(200).json({ data:result });
   }catch(err){
-    res.status(400).send({message:'상품 조회에 실패했습니다.'})
+    res.status(400).send({ message:'상품 조회에 실패했습니다.' })
   }
 
 }

@@ -1,7 +1,6 @@
 import express from "express";
 import router from "./routes/products.router.js";
 import { config } from 'dotenv';
-import mongoose from "mongoose";
 import { connect } from "./schemas/index.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
