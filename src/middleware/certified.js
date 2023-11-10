@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
+const { Users } = require('../models');
 
-const certifiedMiddleWare = (req,res,next)=>{
+const certifiedMiddleWare = async (req,res,next)=>{
   const authorization = req.headers.authorization
   const bearerCheck = authorization && authorization.split(' ')[0] === 'Bearer';
   
@@ -10,6 +11,10 @@ const certifiedMiddleWare = (req,res,next)=>{
     const token = authorization.split(' ')[1];
     const tokenCheck = jwt.verify(token,process.env.JWT_SECRET_KEY)
 
+    const user = await Users.findByPk(tokenCheck.user_id)
+
+    res.locals.user = user.dataValues;
+
   }catch(err){
     if(err.message === 'jwt expired') return res.status(400).send({ message:'토큰 유효기간 에러' })
     if(err.message === 'invalid signature') return res.status(400).send({ message:'토큰 유효성 검사 에러' })
@@ -17,6 +22,7 @@ const certifiedMiddleWare = (req,res,next)=>{
     return res.status(400).send({ message:'토큰 에러' })
   }
 
+  // 인증에 성공하는 경우에는 req.locals.user에 인증 된 사용자 정보를 담고, 다음 동작을 진행합니다.
   next();
 }
 

@@ -1,6 +1,7 @@
 const Products = require("../../models/products.js");
 
 const deleteProduct = async (req,res) => {
+  const user = res.locals.user;
   const { productId } = req.params;
   const { password } = req.body;
 

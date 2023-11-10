@@ -3,18 +3,6 @@
 const {
   Model
 } = require('sequelize');
-// const sequelize = new Sequelize("sqlite::memory:");
-// const Products = sequelize.define("Product",{
-//   title: DataTypes.STRING,
-//   content: DataTypes.STRING,
-//   author: DataTypes.STRING,
-//   password: DataTypes.STRING,
-//   status: DataTypes.STRING
-// },{
-//   sequelize,
-//   modelName: 'Products',
-// });
-// export default Products;
 
 module.exports = (sequelize, DataTypes) => {
   class Products extends Model {
@@ -30,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
   Products.init({
     product_id: {
       primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+    user_id:{
       type: DataTypes.INTEGER,
     },
     title: {

@@ -1,6 +1,7 @@
 const Products = require("../../models/products.js");
 
 const updateProduct = async (req,res) => {
+  const user = res.locals.user;
   const { productId } = req.params;
   const { title,content,author,password } = req.body;
 

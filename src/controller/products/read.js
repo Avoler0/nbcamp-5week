@@ -3,7 +3,8 @@ const { Products } = require('../../models');
 const createSort = { createdAt: -1 };
 
 const readAllProduct = async (req,res) => {
-
+  const user = res.locals.user;
+  console.log('로그인',res.locals.user)
   try{
     const result = await Products.findAll();
 
