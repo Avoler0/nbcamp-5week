@@ -1,10 +1,11 @@
-import express from "express";
-import router from "./routes/products.router.js";
-import { config } from 'dotenv';
-import { connect } from "./schemas/index.js";
-import swaggerJSDoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
-config();
+const express = require("express");
+const productsRouter = require("./src/routes/products.router");
+const connect = require("./src/schemas/index");
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const usersRouter = require("./src/routes/users.router");
+const fs = require('fs');
+require("dotenv").config();
 
 const swaggerOptions = {
   swaggerDefinition:{
@@ -23,10 +24,17 @@ const openapiSpectification = swaggerJSDoc(swaggerOptions);
 
 const app = express();
 const port = process.env.SERVER_PORT;
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpectification));
-app.use(express.json());
-app.use('/api', router)
 
+app.use(express.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpectification));
+
+app.use('/api' ,express.urlencoded({extended:false}),[usersRouter,productsRouter])
+
+app.get('/',(req,res)=>{
+  const index = fs.readFileSync('./index.html')
+  res.sendFile(__dirname + '/index.html');
+})
 app.listen(port, () => {
   console.log(port, '포트로 서버가 열렸어요!');
 
