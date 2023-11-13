@@ -4,6 +4,7 @@ const connect = require("./src/schemas/index");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const usersRouter = require("./src/routes/users.router");
+
 const fs = require('fs');
 require("dotenv").config();
 
@@ -29,7 +30,8 @@ app.use(express.json());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpectification));
 
-app.use('/api' ,express.urlencoded({extended:false}),[usersRouter,productsRouter])
+app.use('/api', express.urlencoded({extended:false}), productsRouter);
+app.use('/api/account', express.urlencoded({extended:false}), usersRouter);
 
 app.get('/',(req,res)=>{
   const index = fs.readFileSync('./index.html')

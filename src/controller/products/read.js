@@ -1,12 +1,19 @@
-const { Products } = require('../../models');
-
-const createSort = { createdAt: -1 };
+const { Products,Users } = require('../../models');
 
 const readAllProduct = async (req,res) => {
-  const user = res.locals.user;
-  console.log('로그인',res.locals.user)
+  // Query 스트링 예외처리 ASC or DESC 아니면 Default 값은 ASC
+  const orderStr = req.query.order ? req.query.order.toUpperCase() === 'ASC' ? 'ASC' : req.query.order.toUpperCase() === 'DESC' ? 'DESC' : 'ASC' : 'ASC';
+
   try{
-    const result = await Products.findAll();
+    const result = await Products.findAll({
+      associations:'user_id',
+      include: {
+        model:Users,
+        associations:'user_id',
+        attributes:['email'],
+      },
+      order:[['createdAt',orderStr]],
+    });
 
     res.status(200).json({ data:result });
   }catch(err){
@@ -17,9 +24,12 @@ const readAllProduct = async (req,res) => {
 }
 
 const readByIdProduct= async (req,res) => {
+  // Query 스트링 예외처리 ASC or DESC 아니면 Default 값은 ASC
+  const orderStr = req.query.order ? req.query.order.toUpperCase() === 'ASC' ? 'ASC' : req.query.order.toUpperCase() === 'DESC' ? 'DESC' : 'ASC' : 'ASC';
   const { productId } = req.params;
+  
   try{
-    const result = await Products.find({_id: productId});
+    const result = await Products.findOne({ where: { product_id: productId }, order:[['createdAt',orderStr]]});
 
     if(!result.length) throw new Error('not fount')
     

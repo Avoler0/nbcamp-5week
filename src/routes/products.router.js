@@ -7,20 +7,19 @@ const certifiedMiddleWare = require("../../src/middleware/certified");
 
 const productsRouter = express.Router();
 
-productsRouter.use(certifiedMiddleWare);
 
 // Create
-productsRouter.post('/product',certifiedMiddleWare,createProduct)
+productsRouter.post('/product', certifiedMiddleWare, createProduct)
 
 // Read
-productsRouter.get('/products',readAllProduct)
-productsRouter.get('/product/:productId', readByIdProduct)
+productsRouter.get('/products', readAllProduct)
+productsRouter.get('/product/:productId',  readByIdProduct)
 
 // Update
-productsRouter.patch('/product/:productId',updateProduct)
+productsRouter.patch('/product/:productId', certifiedMiddleWare, updateProduct)
 
 // Delete
-productsRouter.delete('/product/:productId',deleteProduct)
+productsRouter.delete('/product/:productId', certifiedMiddleWare, deleteProduct)
 
 module.exports = productsRouter;
 

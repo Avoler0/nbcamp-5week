@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // define association here
+    static associate(models){
+      models.Products.belongsTo(models.Users, { foreignKey: "user_id" });
     }
   }
   Products.init({
@@ -32,10 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     author: {
       type: DataTypes.STRING
     },
-    password: {
-      type: DataTypes.STRING
-    },
     status: {
+      defaultValue: "FOR_SALE",
       type: DataTypes.STRING
     },
     createdAt: {
@@ -50,5 +48,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Products',
   });
+  
   return Products;
 };

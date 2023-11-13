@@ -12,12 +12,10 @@ const createRegister = async (req,res) => {
   
   try{
     const encryptPw = encryptPassword(password);
-    console.log('회원가입 암호화',encryptPw)
-    const result = await Users.create({ email,password:encryptPw,checkPassword });
-    // const data = { user_id:result.null, email:result.email}
-    // const accessToken = createJwtAccessToken(data);
 
-    res.cookie('accessToken',accessToken)
+    const result = await Users.create({ email,password:encryptPw,checkPassword });
+    const data = { user_id:result.null, email:result.email}
+
     res.status(200).send({ message:"회원가입 완료",data});
   }catch(err){
     console.log(err)

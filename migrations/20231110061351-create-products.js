@@ -25,10 +25,6 @@ module.exports = {
         allowNull: false,
         type:Sequelize.STRING,
       },
-      password:{
-        allowNull: false,
-        type:Sequelize.STRING,
-      },
       status:{
         allowNull: false,
         defaultValue: "FOR_SALE",
@@ -42,6 +38,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
+    });
+    await queryInterface.addConstraint('Products', {
+      fields: ['user_id'],
+      type: 'foreign key',
+      references: {
+        table: "Users",
+        field: "user_id",
+      },
     });
   },
   async down(queryInterface, Sequelize) {
