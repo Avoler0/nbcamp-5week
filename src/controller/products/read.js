@@ -15,10 +15,10 @@ const readAllProduct = async (req,res) => {
       order:[['createdAt',orderStr]],
     });
 
-    res.status(200).json({ data:result });
+    res.status(200).json({ message:'상품 전체 조회에 성공했습니다.', data:result });
   }catch(err){
     console.log(err)
-    res.status(400).send({ message:'상품 조회에 실패했습니다.' })
+    res.status(500).send({ message:'상품 전체 조회에 실패했습니다.' })
   }
 
 }
@@ -31,11 +31,11 @@ const readByIdProduct= async (req,res) => {
   try{
     const result = await Products.findOne({ where: { product_id: productId }, order:[['createdAt',orderStr]]});
 
-    if(!result.length) throw new Error('not fount')
+    if(!result) return res.status(400).send({ message:'해당하는 상품은 없습니다.' });
     
-    res.status(200).json({data:result[0]});
+    res.status(200).json({ message:'상품 상세 조회에 성공하였습니다.', data:result});
   }catch(err){
-    res.status(400).send({message:'상품 조회에 실패했습니다.'});
+    res.status(500).send({message:'상품 상세 조회에 실패했습니다.'});
   }
 }
 

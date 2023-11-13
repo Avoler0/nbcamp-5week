@@ -26,15 +26,14 @@ const loginUser = async (req,res) => {
     //   }
     // })
 
-    if(!result) throw new Error('not fount')
+    if(!result) return res.status(204).send({message:'이메일 또는 비밀번호가 일치하지 않습니다.'});
 
     const accessToken = createJwtAccessToken({user_id:result.dataValues.user_id});
 
     res.cookie('accessToken',accessToken);
     res.status(200).json({ message:'로그인에 성공 하였습니다.' });
   }catch(err){
-    console.log(err);
-    res.status(400).send({message:'찾는 아이디가 없습니다.'});
+    res.status(500).send({message:'로그인 서버 에러.'});
   }
 }
 

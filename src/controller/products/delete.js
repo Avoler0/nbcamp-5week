@@ -8,7 +8,7 @@ const deleteProduct = async (req,res) => {
     const checkResult = await Products.findOne({ where: { product_id: productId } })
 
     if(!checkResult) 
-    return res.status(404).send({ message:'상품 조회에 실패하였습니다.' });
+    return res.status(204).send({ message:'해당하는 상품은 없습니다.' });
 
     if(checkResult.dataValues.user_id !== user.user_id)
     return res.status(401).send({ message:'상품을 삭제할 권한이 존재하지 않습니다.' });
@@ -18,7 +18,7 @@ const deleteProduct = async (req,res) => {
     res.status(200).send({message:"상품을 삭제하였습니다."});
   }catch(err){
     console.log(err,'에러')
-    return res.status(400).send({ message:'데이터 형식이 올바르지 않습니다.' ,err});
+    return res.status(500).send({ message:'상품 삭제에 실패하였습니다.' ,err});
   }
 }
 
