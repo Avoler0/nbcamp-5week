@@ -21,7 +21,7 @@ const createRegister = async (req,res) => {
     console.log(err)
     if(err.name === 'SequelizeUniqueConstraintError') return res.status(400).send({message:'중복된 이메일입니다.'})
 
-    res.status(400).send({ message:'회원가입 실패' ,err})
+    res.status(500).send({ message:'회원가입 실패' ,err})
   }
 }
 
