@@ -23,7 +23,7 @@ const swaggerOptions = {
 const openapiSpectification = swaggerJSDoc(swaggerOptions);
 
 const app = express();
-const port = process.env.SERVER_PORT;
+const port = process.env.SERVER_PORT || 3000;
 
 app.use(express.json());
 
